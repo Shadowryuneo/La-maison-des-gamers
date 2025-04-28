@@ -1,0 +1,149 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Description/Mettre au panier
+{% endblock %}
+
+{% block h1 %}
+	{{ produit.nom|capitalize }}
+{% endblock %}
+
+
+{% block body %}
+
+	{# <a class="btn btn-dark" href="{{ path('app_categorie') }}">categorie</a> #}
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-9">
+
+				<div class="shadow p-4 my-4 bg-white">
+					{% if produit.image %}
+						<img src="{{ asset('image/produit/' ~ produit.image) }}" title="{{ produit.nom }}" alt="{{ produit.nom }}" class="card-img-top">
+					{% else %}
+						<img src="{{ asset('image/defaut.jpg') }}" title="image par defaut" alt="image par defaut" class="card-img-top">
+					{% endif %}
+				</div>
+
+				<div class="shadow p-4 my-4 bg-white">
+					<h2>Prix :
+						{{ produit.prix }}
+						€</h2>
+				</div>
+
+				<div class="shadow p-4 my-4 bg-white">
+					<h2>Description :
+						{{ produit.description }}</h2>
+				</div>
+
+				<div class="shadow p-4 my-4 bg-white">
+					<h2>Catégorie :
+						{{ produit.categorie.nom }}</h2>
+				</div>
+
+				{# <div class="shadow p-4 my-4 bg-white">
+					<h2>Marque : {{ product.brand.name }}</h2>
+				</div> #}
+
+				{# <div class="shadow p-4 my-4 bg-white">
+					<h2>Matière(s) :</h2>
+					<ul class="list-group mt-2">
+				{% for material in product.materials %}
+					<li class="list-group-item">{{ material.name }}</li>
+				{% endfor %}
+					</ul>
+				</div> #}
+
+
+				<div class="shadow p-4 my-4 bg-white">
+					<h2>Les commentaires</h2>
+					{% if app.user %}
+						{{ form_start(form)}}
+
+						{{ form_row(form.message)}}
+
+						<input type="submit" value="Enregistrer mon commentaire" class="btn btn-primary w-100 mt-3">
+						{{ form_end(form)}}
+					{% else %}
+						<h6>Veuillez vous connecter pour laisser votre avis</h6>
+					{% endif %}
+					{% for avis in produit.avis %}
+						<div class="shadow m-3 p-3">
+							<p>{{ avis.createdAt|date('d/m/Y H:i') }}</p>
+							<p>{{ avis.utilisateurs.prenom }}
+								{{ avis.utilisateurs.nom }}
+							</p>
+							
+							<p>
+								<strong>{{ avis.message }}</strong>
+							</p>
+						</div>
+
+					{% else %}
+						<p>Soyez le premier à laisser votre avis</p>
+					{% endfor %}
+
+
+					{# {% if app.user %}
+						{{ form_start(form)}}
+					
+						{{ form_row(form.message)}}
+					
+					<input type="submit" value="Enregistrer mon commentaire" class="btn btn-primary w-100 mt-3">
+						{{ form_end(form)}}
+						{% else %}
+					<h2>Veuillez vous connecter pour laisser votre avis</h2>
+					{% endif %} #}
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div
+					class="shadow p-4 my-4 bg-white">
+					{# <h2 class="text-center my-3">Ajouter au panier</h2> #}
+
+					{% if  produit.stock %}
+
+						{% set stock = 20 %}
+
+						{% if produit.stock < 20 %}
+							{% set  stock = produit.stock %}
+						{% endif %}
+
+						{# {% if app.user %} #}
+						<form method="post" action="{{ path('app_cart_add', {id: produit.id}) }}">
+
+							<select name="quantity" id="" class="form-control">
+								{% for i in 1..stock %}
+									<option value="{{i}}">{{i}}</option>
+								{% endfor %}
+							</select>
+							<input type="hidden" name="produit" value="{{ produit.id}}">
+							<input type="submit" value="Ajouter au panier" class="btn btn-primary w-100 mt-3">
+						</form>
+						{# {% else %} #}
+
+						{# <p>Veuillez d'abord vous inscrire</p>
+							<a href="{{ path('app_register')}}" class="btn btn-primary w-100">Inscription</a> #}
+
+						{# {% endif %} #}
+
+						{# <form method="post" action="">
+						
+							<select name="" id="" class="form-control">
+						{% for i in 1..stock %}
+							<option value="{{i}}">{{i}}</option>
+						{% endfor %}
+						</select>
+						
+						<input type="submit" value="Mettre au panier" class="btn btn-primary w-100 mt-3">
+						</form> #}
+					{% else %}
+						<p class="text-danger text-center">Rupture de stock</p>
+					{% endif %}
+
+				</div>
+
+			</div>
+		</div>
+
+
+	{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{# {% block h1 %}<h1>Back office</h1>{% endblock %} #}
+{% block title %}Admin{% endblock %}
+
+
+{% block body %}
+	<h1 class="text-center">Back office</h1>
+	<div class="container text-center">
+		<body>
+			<div class="gerer text-center btn btn-primary me-5 mt-5">
+				<a class="nav-link" href="{{ path('app_produit_index') }}">Gestion des produits</a>
+			</div>
+			<div class="gerer text-center btn btn-primary mt-5">
+				<a class="nav-link" href="{{ path('app_categories_index') }}">Gestion des categories</a>
+			</div>
+		</body>
+	</div>
+</body>
+
+{# <div class="row justify-content-center container-fluid">
+		<div class="col-5">
+			<h1 class="text-center">Back office</h1>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quidem 
+				debitis fugit eum dolorum dolores perferendis, nisi dolor itaque quis distinctio inventore. 
+				Repellendus possimus distinctio illum. Magni blanditiis dolores error!</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non magni nihil 
+				doloremque laudantium optio, ea quae commodi qui laborum possimus dolorum quod, 
+				cumque accusantium repellat neque tempora magnam fugiat dicta.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint quae laborum minus, dolorum unde reprehenderit ab dolore labore 
+				ex dignissimos aut nisi repellendus numquam quibusdam qui repellat illum commodi. Numquam.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, explicabo animi ratione ad veritatis nihil 
+				velit quis illo nemo optio commodi sunt inventore laborum voluptate odio iste pariatur suscipit numquam.</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, officia sit. Aliquid atque error 
+				similique ipsum voluptates soluta expedita, mollitia, 
+				eaque consequuntur eligendi nihil, culpa veritatis? Soluta aliquid corporis vitae!</p>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, facere aperiam. 
+				Ab consequatur rem consequuntur delectus aspernatur, maxime, quae eum velit 
+				esse iusto earum aliquid, perferendis commodi tenetur labore quod?</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, 
+				magni mollitia ea explicabo reprehenderit necessitatibus tenetur omnis architecto commodi,
+				blanditiis rerum in assumenda suscipit autem? Dignissimos ad saepe porro dicta.</p>
+		</div>
+	</div> #}{% endblock %}

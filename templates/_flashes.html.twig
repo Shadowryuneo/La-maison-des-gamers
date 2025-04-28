@@ -1,0 +1,11 @@
+{% for notification in app.flashes('success') %}
+    <div class= "alert alert-succes text-center p-3 m-2 w-50 mx-auto">
+    {{ notification}}</div>
+{% endfor %}
+
+
+{% for notification in app.flashes('error') %}
+    <div class="alert alert-danger text-center p-3 m-2 w-50 mx-auto">
+        {{ notification }}
+    </div>
+{% endfor %}

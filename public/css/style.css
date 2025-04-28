@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    background-color: #ffffff;
+    min-height: 80vh;
+}
+
+header, footer{
+    height: 10vh;
+}
+
+/* .nav-link{
+    display: inline-flex; */
+    /* justify-content: space-between;
+    align-items: center; */
+/* } */
+
+
+/* .imgHome{
+    display: flex;
+} */
+
+/* header, footer{
+    height: 10vh;
+} */
+
+main {
+    /* width: 100%; */
+    /* height: 100%; */
+    min-height: 80vh;
+    background-image: url("../image/acceuil.png");
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: cover;
+    color: white;
+    /* border: 0; */
+}
+
+.mdg{
+    justify-content: space-between;
+}
+
+/* body {
+    background-image: url("../image/acceuil.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+} */
+
+
+/* .mdg_element {
+    position: relative;
+     text-decoration: none;
+    margin-top: calc(100px + 100%);
+} */
+
+/* footer{
+    height: auto;
+} */
+
+/* .espace{
+    text-align: center;
+} */

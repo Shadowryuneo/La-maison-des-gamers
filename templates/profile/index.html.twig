@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="mb-5">
+			<h1 class="text-center">Mon compte</h1>
+		</div>
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Mes informations personnelles</h4>
+				<p class="card-text">
+					Nom :
+					{{ app.user.nom}}<br>
+					Prenom :
+					{{ app.user.prenom}}<br>
+					email :
+					{{ app.user.email}}<br>
+				</p>
+			</div>
+		</div>
+
+		<form class=" card btn btn-primary" action="{{ path('app_profile_edit') }}" method="GET, POST">
+			<button type="submit" class="btn btn-primary">Modifier mon compte</button>
+		</form>
+
+		<form class=" card btn btn-primary" action="{{ path('app_profile_password_edit') }}" method="GET, POST">
+			<button type="submit" class="btn btn-primary">Modifier mon mot de passe</button>
+		</form>
+
+		<form class="card btn btn-danger" action="{{ path('app_profile_delete') }}" method="POST">
+			<button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+		</form>
+	</div>
+{% endblock %}

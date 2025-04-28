@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir la Categories
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center">Categories</h1>
+
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ category.id }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ category.nom }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		{# <a class="btn btn-primary" href="{{ path('app_categories_index') }}">Retour a la gestion des Catégories</a> #}
+		<a class="btn btn-primary mb-3" href="{{ path('app_categories_edit', {'id': category.id}) }}">Modifier</a>
+
+		{{ include('categories/_delete_form.html.twig') }}
+
+		<a class="btn btn-primary" href="{{ path('app_categories_index') }}">Retour a la gestion des Catégories</a>
+	</div>
+{% endblock %}

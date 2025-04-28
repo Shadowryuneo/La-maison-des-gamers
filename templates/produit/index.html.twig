@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit index
+{% endblock %}
+
+{% block body %}
+	<div class="container mb-4">
+		<h1 class="text-center">Gestion des produits</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Prix</th>
+					<th>Description</th>
+					<th>Nom</th>
+					{# <th>Image</th> #}
+					{# <th>status</th> #}
+					<th>stock</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for produit in produits %}
+					<tr>
+						<td>{{ produit.id }}</td>
+						<td>{{ produit.prix }} €</td>
+						<td>{{ produit.description }}</td>
+						<td>{{ produit.nom }}</td>
+						{# <td>{{ produit.status}}</td> #}
+						{# <td>{{ produit.image }}</td> #}
+						<td>
+							{{ produit.stock }}
+						</td>
+						{# <td>{{ produit.status}}</td> #}
+						<td>
+							<a class="btn btn-primary" href="{{ path('app_produit_show', {'id': produit.id}) }}">voir</a>
+							<a class="btn btn-primary" href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="8">aucun produit n'est enregistré</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a class="btn btn-primary" href="{{ path('app_produit_new') }}">Ajouter un nouveau produit</a>
+	</div>
+{% endblock %}

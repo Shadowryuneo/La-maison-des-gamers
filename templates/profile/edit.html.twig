@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier le compte{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="mb-5">
+	<h1 class="text-center">Modifier mon compte</h1>
+</div>
+    {{ form_start(form)}}
+
+    {{ form_row(form.email)}}
+    {{ form_row(form.nom)}}
+    {{ form_row(form.prenom)}}
+<div class="card btn btn-primary mt-5">
+<input type="submit" value="Modifier mon compte" class="btn btn-primary">
+</div>
+    {{form_end(form)}}
+</div>
+{% endblock %}
