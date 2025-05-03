@@ -27,6 +27,9 @@ class Detailcommande
     #[ORM\ManyToOne(inversedBy: 'Detailcommande')]
     private ?Commande $commande = null;
 
+    #[ORM\Column]
+    private ?int $quantity = null;
+
     
     public function getId(): ?int
     {
@@ -78,6 +81,18 @@ class Detailcommande
     public function setCommande(?Commande $commande): static
     {
         $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

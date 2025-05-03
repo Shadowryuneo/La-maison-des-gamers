@@ -23,6 +23,12 @@ class Adressefacturation
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Utilisateurs $utilisateurs = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $rue = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pays = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +68,30 @@ class Adressefacturation
     public function setUtilisateurs(?Utilisateurs $utilisateurs): static
     {
         $this->utilisateurs = $utilisateurs;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(?string $rue): static
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(?string $pays): static
+    {
+        $this->pays = $pays;
 
         return $this;
     }

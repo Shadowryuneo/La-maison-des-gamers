@@ -33,7 +33,7 @@
                 <td>{{ item.product.nom }}</td>
                 <td>{{ item.quantity }}</td>
                 <td>{{ item.product.prix | number_format(2, '.', ',') }} €</td>
-                <td>{{ (item.product.prix * item.quantity) | number_format(2, '.', ',') }} €</td>
+                <td>{{ (item.quantity * item.product.prix) | number_format(2, '.', ',') }} €</td>
                 <td>
                     <form action="{{ path('app_cart_add', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
                         <input type="hidden" name="quantity" value="1">
@@ -62,9 +62,7 @@
         </tfoot>
     {% endif %}
 </table>
-<pre>
-    {{ dump() }}
-</pre>
+
 {% if app.user %}
     <p>Connecté en tant que <strong>{{ app.user.prenom }}  {{app.user.nom}}</strong></p>
 
@@ -76,8 +74,9 @@
     <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Se connecter</a>
 {% endif %}
 
-<a href="{{ path('app_trashpanier') }}" class="btn btn-danger">Vider le panier</a>
+<a href="{{ path('app_trashpanier') }}" class="btn btn-danger mb-3">Vider le panier</a>
 <a href="{{ path('app_home') }}" class="btn btn-primary mb-3">Continuer mes achats</a>
+<a href="{{ path('commande_valider') }}" class="btn btn-success mb-3">Valider ma commande</a>
 	</div>
 	{# <div class="container card shadow mt-5">
 			<table class="table">
