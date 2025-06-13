@@ -7,88 +7,99 @@
 
 	{# <h1 class="text-center">Mon panier</h1> #}
 	<div class="container card shadow mt-3 mb-3">
-		<h1>Votre panier</h1>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Nom</th>
-            <th>Quantité</th>
-            <th>Prix unitaire</th>
-            <th>Total</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in dataPanier %}
-            <tr>
-                <td>
-                    {% if item.product.image %}
-                        <img src="{{ asset('image/produit/' ~ item.product.image) }}" alt="" class="img-fluid" width="100">
-                    {% else %}
-                        <img src="{{ asset('image/defaut.jpg') }}" alt="" class="img-fluid" width="100">
-                    {% endif %}
-                </td>
-                <td>{{ item.product.nom }}</td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.product.prix | number_format(2, '.', ',') }} €</td>
-                <td>{{ (item.quantity * item.product.prix) | number_format(2, '.', ',') }} €</td>
-                <td>
-                    <form action="{{ path('app_cart_add', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
-                        <input type="hidden" name="quantity" value="1">
-                        <button type="submit" class="btn btn-sm btn-success">+</button>
-                    </form>
-                    <form action="{{ path('app_suppanier', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
-                        <button type="submit" class="btn btn-sm btn-warning">-</button>
-                    </form>
-                    <form action="{{ path('app_removepanier', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
-                        <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
-                    </form>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6" class="text-center">Votre panier est vide.</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-    {% if dataPanier|length > 0 %}
-        <tfoot>
-            <tr>
-                <td colspan="4" class="text-end"><strong>Total général :</strong></td>
-                <td colspan="2"><strong>{{ total | number_format(2, '.', ',') }} €</strong></td>
-            </tr>
-        </tfoot>
-    {% endif %}
-</table>
+					{% for item in dataPanier %}
 
-{% if app.user %}
-    <p>Connecté en tant que <strong>{{ app.user.prenom }}  {{app.user.nom}}</strong></p>
+						<div class="row p-3 my-3 shadow">
 
-    {# <form action="{{ path('app_commande_valider') }}" method="POST">
-        <button type="submit" class="btn btn-success">Valider ma commande</button>
-    </form> #}
-{% else %}
-    <p class="text-warning">Vous devez être connecté pour valider votre commande.</p>
-    <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Se connecter</a>
-{% endif %}
+							<div class="col-lg-2 align-self-center">
+								{% if item.product.image %}
+									<img src="{{ asset('image/produit/' ~ item.product.image) }}" alt="{{ item.product.nom }}" title="{{ item.product.nom }}" class="img-fluid w-100" width="100">
+								{% else %}
+									<img src="{{ asset('image/defaut.jpg') }}" alt="image par defaut" title="image par defaut" class="img-fluid" width="100">
+								{% endif %}
+							</div>
+							
+							<div class="col-lg-8  align-self-center">
+							
+								<p>
+									<a class="text-decoration-none text-dark" target="_blank" href="{{ path('app_categorie_produit', {'id': item.product.id }) }}">{{ item.product.nom }}</a>
+								</p>
 
-<a href="{{ path('app_trashpanier') }}" class="btn btn-danger mb-3">Vider le panier</a>
-<a href="{{ path('app_home') }}" class="btn btn-primary mb-3">Continuer mes achats</a>
-<a href="{{ path('commande_valider') }}" class="btn btn-success mb-3">Valider ma commande</a>
+								<p>Quantité : {{ item.quantity }}</p>
+								
+								<p>Prix unitaire :  {{ item.product.prix | number_format(2, '.', ',') }}€</p>
+
+								<form action="{{ path('app_cart_add', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
+									<input type="hidden" name="quantity" value="1">
+									<button type="submit" class="btn btn-sm btn-success">+</button>
+								</form>
+								<form action="{{ path('app_suppanier', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
+									<button type="submit" class="btn btn-sm btn-warning">-</button>
+								</form>
+								<form action="{{ path('app_removepanier', { id: item.product.id }) }}" method="POST" style="display:inline-block;">
+									<button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+								</form>
+							</div>
+
+							<div class="card col-lg-2 align-self-center mt-2">
+								<p>Montant total ttc :<br>{{ (item.quantity * item.product.prix) | number_format(2, '.', ',') }} €</p>
+							</div>
+							
+						</div>
+
+					{% else %}
+						<tr>
+							<td colspan="6" class="text-center">Votre panier est vide.</td>
+						</tr>
+					{% endfor %}
+			
+
+
+
+			{% if dataPanier|length > 0 %}
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<strong style="display: block; text-align: right">Sous Total TTC : {{ total | number_format(2, '.', ',') }} €</strong>
+						</td>
+						{# <td colspan="2">
+							<strong> {{ total | number_format(2, '.', ',') }} €</strong>
+						</td> #}
+					</tr>
+				</tfoot>
+			{% endif %}
+		
+
+		{% if app.user %}
+			<p>Connecté en tant que
+				<strong>{{ app.user.prenom }}
+					{{app.user.nom}}</strong>
+			</p>
+
+			{# <form action="{{ path('app_commande_valider') }}" method="POST">
+				<button type="submit" class="btn btn-success">Valider ma commande</button>
+			</form> #}
+		{% else %}
+			<p class="text-primary">Vous devez être connecté pour valider votre commande.</p>
+			<a href="{{ path('app_login') }}" class="btn btn-outline-primary mb-3">Se connecter</a>
+		{% endif %}
+
+		<a href="{{ path('app_trashpanier') }}" class="btn btn-outline-danger mb-3">Vider le panier</a>
+		<a href="{{ path('app_home') }}" class="btn btn-outline-primary mb-3">Continuer mes achats</a>
+		<a href="{{ path('commande_valider') }}" class="btn btn-outline-success mb-3">Valider ma commande</a>
 	</div>
 	{# <div class="container card shadow mt-5">
-			<table class="table">
-						<thead>
-			            <h1>Votre panier</h1>
-							<tr>
-			                    <th class="me-3">Prix</th>
-							</tr>
-						</thead>
-			            
-			</div> #}
+		<table class="table">
+		<thead>
+		<h1>Votre panier</h1>
+		<tr>
+			<th class="me-3">Prix</th>
+		</tr>
+	</thead>
+					            
+	</div> #}
 	{# <pre>
-			    {{ dump(cart) }}
-			</pre> #}
+		{{ dump(cart) }}
+	</pre> #}
 {% endblock %}

@@ -1,0 +1,12 @@
+<h2>Merci pour votre commande, {{ commande.utilisateurs.nom }} !</h2>
+
+<p>Votre commande n°{{ commande.nom }} a bien été validée.</p>
+
+<p>Total : {{ commande.prixtotal }} €</p>
+
+<h3>Détails :</h3>
+<ul>
+    {% for detail in commande.detailcommande %}
+        <li>{{ detail.produit.nom }} x {{ detail.quantity }} - {{ detail.prix }} €</li>
+    {% endfor %}
+</ul>

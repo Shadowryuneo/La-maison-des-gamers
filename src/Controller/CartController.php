@@ -5,11 +5,10 @@ namespace App\Controller;
 
 // Importation des entités et classes nécessaires
 use App\Entity\Panier;
-use App\Entity\Commande;
+// use App\Entity\Commande;
 // use App\Entity\Produit;
-// use App\Entity\Produits;
 use App\Repository\PanierRepository;
-use App\Repository\CommandeRepository;
+// use App\Repository\CommandeRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,10 +50,10 @@ final class CartController extends AbstractController
             }
         } else {
             // Si l'utilisateur n'est pas connecté → on utilise la session
-            $panier = $session->get("panier", []); // Récupère le panier depuis la session
+            $panier = $session->get("panier", []); // on récupère le panier depuis la session
 
             foreach ($panier as $id => $quantity) {
-                $product = $produitRepository->find($id); // Trouve le produit correspondant à l'ID
+                $product = $produitRepository->find($id); // on trouve le produit correspondant à l'ID
                 if ($product) {
                     $dataPanier[] = [
                         "product" => $product,

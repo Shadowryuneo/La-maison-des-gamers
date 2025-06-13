@@ -19,10 +19,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
-    {
-        return $this->render('home/index.html.twig', []);
+public function index(ProduitRepository $produitRepository): Response
+{
+    $produits = $produitRepository->findBy(['status' => true]);
+
+    // Regroupement manuel par catégorie
+    $produitsParCategorie = [];
+    foreach ($produits as $produit) {
+        $categorie = $produit->getCategorie()->getNom(); // ou ->getId() selon ton modèle
+        $produitsParCategorie[$categorie][] = $produit;
     }
+
+    return $this->render('home/index.html.twig', [
+        'produitsParCategorie' => $produitsParCategorie,
+    ]);
+}
 
     #[Route('/mention_legal', name: 'app_mention_legal')]
     public function mention(): Response

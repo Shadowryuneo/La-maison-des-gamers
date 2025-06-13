@@ -6,17 +6,21 @@
 
 {% block body %}
 	<h1 class="text-center">Back office</h1>
-	<div class="container text-center">
-		<body>
-			<div class="gerer text-center btn btn-primary me-5 mt-5">
-				<a class="nav-link" href="{{ path('app_produit_index') }}">Gestion des produits</a>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-5 d-grid gap-2 mt-4">
+				<a href="{{ path('app_produit_index') }}" class="btn btn-primary btn-lg">
+					Gestion des produits
+				</a>
 			</div>
-			<div class="gerer text-center btn btn-primary mt-5">
-				<a class="nav-link" href="{{ path('app_categories_index') }}">Gestion des categories</a>
+			<div class="col-12 col-md-5 d-grid gap-2 mt-4">
+				<a href="{{ path('app_categories_index') }}" class="btn btn-primary btn-lg">
+					Gestion des catégories
+				</a>
 			</div>
-		</body>
+		</div>
 	</div>
-</body>
+
 
 {# <div class="row justify-content-center container-fluid">
 		<div class="col-5">

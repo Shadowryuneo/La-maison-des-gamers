@@ -42,6 +42,9 @@ class Commande
     #[ORM\OneToMany(targetEntity: Detailcommande::class, mappedBy: 'commande')]
     private Collection $Detailcommande;
 
+    #[ORM\Column]
+    private ?bool $isPaid = false;
+
     public function __construct()
     {
         $this->Payement = new ArrayCollection();
@@ -169,6 +172,18 @@ class Commande
                 $detailcommande->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isPaid(): ?bool
+    {
+        return $this->isPaid;
+    }
+
+    public function setIsPaid(bool $isPaid): static
+    {
+        $this->isPaid = $isPaid;
 
         return $this;
     }
